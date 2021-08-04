@@ -1,0 +1,16 @@
+﻿@model CategoryListViewModel
+
+
+
+<div class="list-group">
+    <a href="/product/index" class="list-group-item">All Products</a>
+    @foreach (var category in Model.Categories)
+    {
+        var isActive = "list-group-item";
+        if (category.CategoryID == Model.CurrentCategory)
+        {
+            isActive += " active";
+        }
+        <a href="/product/index?category=@category.CategoryID" class="@isActive">@category.CategoryName</a>
+    }
+</div>

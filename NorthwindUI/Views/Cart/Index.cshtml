@@ -1,0 +1,38 @@
+﻿@model CartlistViewModel
+
+
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Quantity</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Cart.cartLines.Count == 0)
+        {
+            <tr class="text-center">
+                <td colspan="6">No matching records found</td>
+            </tr>
+        }
+        @foreach (var product in Model.Cart.cartLines)
+        {
+            <tr>
+                <td>@product.Products.ProductID</td>
+                <td>@product.Products.ProductName</td>
+                <td>@product.Products.UnitPrice</td>
+                <td>@product.Products.QuantityPerUnit</td>
+                <td>@product.Products.UnitsInStock</td>
+                <td>@product.Quantity</td>
+                <td><a class="btn btn-sm btn-danger" asp-action="RemoveFromCart" asp-controller="Cart" asp-route-id="@product.Products.ProductID">Remove</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
