@@ -28,9 +28,9 @@ namespace NorthwindUI.Helpers
             return cartToCheck;
         }
 
-        public void RemoveCart()
+        public void RemoveCart(string key)
         {
-            throw new NotImplementedException();
+            _httpContextAccesor.HttpContext.Session.Remove(key);
         }
 
         public void SetToCart(string key, Cart cart)

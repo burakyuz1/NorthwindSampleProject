@@ -2,6 +2,7 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +14,7 @@ using NorthwindUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace NorthwindUI
@@ -38,10 +40,10 @@ namespace NorthwindUI
             services.AddScoped<ICartService, CartManager>();
             services.AddScoped<ICartSessionHelper, CartSessionHelper>();
             services.AddSession();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(option=> option.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+            //.AddFluentValidation -> validation iþlemlerini kullanabilmek yazýlan codes.
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

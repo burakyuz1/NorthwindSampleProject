@@ -52,6 +52,27 @@ namespace NorthwindUI.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Complete()
+        {
+            var model = new ShippingDetailsViewModel()
+            {
+                ShippingDetail = new ShippingDetail()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Complete(ShippingDetail shippingDetail)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            TempData.Add("message", "Your order has been successfully completed.");
+            _cartSessionHelper.RemoveCart("cart");
+            return RedirectToAction("Index");
+        }
+
 
 
     }

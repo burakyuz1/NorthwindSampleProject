@@ -10,6 +10,6 @@ namespace NorthwindUI.Helpers
     {
         void SetToCart(string key, Cart cart);
         Cart GetCart(string key);
-        void RemoveCart();
+        void RemoveCart(string key);
     }
 }
